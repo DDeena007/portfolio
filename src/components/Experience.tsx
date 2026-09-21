@@ -13,7 +13,6 @@ export default function Experience() {
           transition={{ duration: 0.5 }}
           className="mb-16"
         >
-          <p className="font-mono text-sm mb-3" style={{ color: '#00d4ff' }}>{'// 03. Experience'}</p>
           <h2 className="section-title">Work Experience</h2>
           <p className="section-subtitle">My professional journey</p>
           <div className="section-divider w-24" />

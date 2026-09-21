@@ -40,7 +40,6 @@ export default function About() {
           transition={{ duration: 0.5 }}
           className="mb-16"
         >
-          <p className="font-mono text-sm mb-3" style={{ color: '#00d4ff' }}>{'// 01. About'}</p>
           <h2 className="section-title">About Me</h2>
           <div className="section-divider w-24 mt-4" />
         </motion.div>

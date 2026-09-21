@@ -40,7 +40,6 @@ export default function Skills() {
           transition={{ duration: 0.5 }}
           className="mb-16"
         >
-          <p className="font-mono text-sm mb-3" style={{ color: '#00d4ff' }}>{'// 02. Skills'}</p>
           <h2 className="section-title">Technical Skills</h2>
           <p className="section-subtitle">Technologies I work with professionally</p>
           <div className="section-divider w-24" />

@@ -74,9 +74,6 @@ export default function Contact() {
           transition={{ duration: 0.5 }}
           className="mb-16 text-center"
         >
-          <p className="font-mono text-sm mb-3" style={{ color: '#00d4ff' }}>
-            {'// 07. Contact'}
-          </p>
           <h2 className="section-title">Get In Touch</h2>
           <p className="section-subtitle max-w-xl mx-auto">
             I'm open to new opportunities, collaborations, or just a great engineering

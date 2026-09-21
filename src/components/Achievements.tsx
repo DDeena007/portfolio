@@ -20,7 +20,6 @@ export default function Achievements() {
           transition={{ duration: 0.5 }}
           className="mb-12"
         >
-          <p className="font-mono text-sm mb-3" style={{ color: '#00d4ff' }}>{'// 06. Achievements'}</p>
           <h2 className="section-title">Achievements</h2>
           <div className="section-divider w-24 mt-4" />
         </motion.div>

@@ -26,7 +26,6 @@ export default function Projects() {
           transition={{ duration: 0.5 }}
           className="mb-16"
         >
-          <p className="font-mono text-sm mb-3" style={{ color: '#00d4ff' }}>{'// 04. Projects'}</p>
           <h2 className="section-title">Featured Projects</h2>
           <p className="section-subtitle">Things I've built at scale</p>
           <div className="section-divider w-24" />

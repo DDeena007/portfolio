@@ -20,7 +20,6 @@ export default function Certifications() {
           transition={{ duration: 0.5 }}
           className="mb-16"
         >
-          <p className="font-mono text-sm mb-3" style={{ color: '#00d4ff' }}>{'// 06. Certifications'}</p>
           <h2 className="section-title">Certifications</h2>
           <p className="section-subtitle">Professional credentials &amp; learning</p>
           <div className="section-divider w-24" />
