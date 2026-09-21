@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import { Menu, X, Code2 } from 'lucide-react'
-import { personalInfo } from '../data/resume'
+import { Menu, X, Code2, Moon, Sun } from 'lucide-react'
+import { useTheme } from '../context/ThemeContext'
 
 const navLinks = [
   { href: '#about', label: 'About' },
@@ -8,6 +8,7 @@ const navLinks = [
   { href: '#experience', label: 'Experience' },
   { href: '#projects', label: 'Projects' },
   { href: '#education', label: 'Education' },
+  { href: '#certifications', label: 'Certifications' },
   { href: '#contact', label: 'Contact' },
 ]
 
@@ -15,12 +16,11 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [activeSection, setActiveSection] = useState('')
+  const { theme, toggleTheme } = useTheme()
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20)
-
-      // Track active section
       const sections = navLinks.map((l) => l.href.substring(1))
       for (const section of sections.reverse()) {
         const el = document.getElementById(section)
@@ -30,7 +30,6 @@ export default function Navbar() {
         }
       }
     }
-
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
@@ -41,26 +40,33 @@ export default function Navbar() {
     if (el) el.scrollIntoView({ behavior: 'smooth' })
   }
 
+  const isLight = theme === 'light'
+
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-[3px] left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-navy-900/95 backdrop-blur-md border-b border-white/5 shadow-lg'
-          : 'bg-transparent'
+          ? 'backdrop-blur-md border-b shadow-lg'
+          : 'bg-transparent border-transparent'
       }`}
+      style={{
+        backgroundColor: scrolled ? 'var(--nav-bg)' : 'transparent',
+        borderColor: scrolled ? (isLight ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.05)') : 'transparent',
+      }}
     >
       <div className="section-container">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="flex items-center gap-2 font-mono font-semibold text-white hover:text-teal-glow transition-colors duration-200"
+            className="flex items-center gap-2 font-mono font-semibold transition-colors duration-200"
+            style={{ color: 'var(--text-primary)' }}
             aria-label="Back to top"
           >
-            <Code2 size={20} className="text-teal-500" />
-            <span className="teal-accent">&lt;</span>
+            <Code2 size={20} style={{ color: '#00d4ff' }} />
+            <span style={{ color: '#00d4ff' }}>&lt;</span>
             <span>DD</span>
-            <span className="teal-accent">/&gt;</span>
+            <span style={{ color: '#00d4ff' }}>/&gt;</span>
           </button>
 
           {/* Desktop nav */}
@@ -69,61 +75,79 @@ export default function Navbar() {
               <button
                 key={link.href}
                 onClick={() => handleNavClick(link.href)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                className={`px-3 py-2 rounded-lg text-xs font-medium transition-all duration-200 ${
                   activeSection === link.href.substring(1)
                     ? 'text-teal-500 bg-teal-500/10'
-                    : 'text-gray-400 hover:text-white hover:bg-white/5'
+                    : ''
                 }`}
+                style={{
+                  color: activeSection === link.href.substring(1) ? '#00d4ff' : 'var(--text-secondary)',
+                }}
               >
                 {link.label}
               </button>
             ))}
-            <a
-              href={personalInfo.resumeFile}
-              download
-              className="ml-2 btn-secondary text-xs px-4 py-2"
-              aria-label="Download Resume"
+
+            {/* Theme toggle */}
+            <button
+              onClick={toggleTheme}
+              className="ml-2 p-2 rounded-lg transition-all duration-200 hover:scale-110"
+              style={{
+                background: isLight ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.06)',
+                color: 'var(--text-secondary)',
+                border: `1px solid ${isLight ? 'rgba(0,0,0,0.1)' : 'rgba(255,255,255,0.1)'}`,
+              }}
+              aria-label={isLight ? 'Switch to dark mode' : 'Switch to light mode'}
+              title={isLight ? 'Switch to dark mode' : 'Switch to light mode'}
             >
-              Resume
-            </a>
+              {isLight ? <Moon size={16} /> : <Sun size={16} />}
+            </button>
           </div>
 
-          {/* Mobile hamburger */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-all"
-            aria-label={isOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={isOpen}
-          >
-            {isOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
+          {/* Mobile controls */}
+          <div className="md:hidden flex items-center gap-2">
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-lg transition-all"
+              style={{
+                background: isLight ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.06)',
+                color: 'var(--text-secondary)',
+              }}
+              aria-label="Toggle theme"
+            >
+              {isLight ? <Moon size={16} /> : <Sun size={16} />}
+            </button>
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="p-2 rounded-lg transition-all"
+              style={{ color: 'var(--text-secondary)' }}
+              aria-label={isOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={isOpen}
+            >
+              {isOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile menu */}
         {isOpen && (
-          <div className="md:hidden border-t border-white/5 py-4 space-y-1">
+          <div
+            className="md:hidden py-4 space-y-1 border-t"
+            style={{ borderColor: isLight ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.05)' }}
+          >
             {navLinks.map((link) => (
               <button
                 key={link.href}
                 onClick={() => handleNavClick(link.href)}
-                className={`block w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${
-                  activeSection === link.href.substring(1)
-                    ? 'text-teal-500 bg-teal-500/10'
-                    : 'text-gray-400 hover:text-white hover:bg-white/5'
-                }`}
+                className="block w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200"
+                style={{
+                  color: activeSection === link.href.substring(1) ? '#00d4ff' : 'var(--text-secondary)',
+                  background: activeSection === link.href.substring(1) ? 'rgba(0,212,255,0.08)' : 'transparent',
+                }}
               >
                 {link.label}
               </button>
             ))}
-            <div className="pt-2 px-4">
-              <a
-                href={personalInfo.resumeFile}
-                download
-                className="btn-secondary text-xs px-4 py-2 w-full justify-center"
-              >
-                Download Resume
-              </a>
-            </div>
           </div>
         )}
       </div>

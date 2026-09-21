@@ -105,14 +105,15 @@ export default function Contact() {
                     <Icon size={20} style={{ color: item.color }} />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="text-xs text-gray-500 mb-0.5">{item.label}</div>
-                    <div className="text-white font-medium text-sm truncate">{item.value}</div>
-                    <div className="text-gray-400 text-xs mt-0.5">{item.description}</div>
+                    <div className="text-xs mb-0.5" style={{ color: 'var(--text-muted)' }}>{item.label}</div>
+                    <div className="font-medium text-sm truncate" style={{ color: 'var(--text-primary)' }}>{item.value}</div>
+                    <div className="text-xs mt-0.5" style={{ color: 'var(--text-secondary)' }}>{item.description}</div>
                   </div>
                   {item.href && (
                     <ArrowRight
                       size={16}
-                      className="text-gray-600 group-hover:text-white group-hover:translate-x-1 transition-all flex-shrink-0"
+                      className="group-hover:translate-x-1 transition-all flex-shrink-0"
+                      style={{ color: 'var(--text-muted)' }}
                     />
                   )}
                 </motion.div>
@@ -151,8 +152,8 @@ export default function Contact() {
             >
               <Send size={22} style={{ color: '#00d4ff' }} />
             </div>
-            <h3 className="text-2xl font-bold text-white mb-3">Open to Opportunities</h3>
-            <p className="text-gray-400 mb-6 max-w-md mx-auto">
+            <h3 className="text-2xl font-bold mb-3" style={{ color: 'var(--text-primary)' }}>Open to Opportunities</h3>
+            <p className="mb-6 max-w-md mx-auto" style={{ color: 'var(--text-secondary)' }}>
               Whether it's a full-time role, contract work, or an interesting project — I'd love
               to hear from you.
             </p>

@@ -26,7 +26,7 @@ const categoryColors: Record<string, string> = {
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-24 relative" style={{ background: 'rgba(255,255,255,0.01)' }}>
+    <section id="skills" className="py-24 relative">
       <div
         className="absolute inset-0 pointer-events-none"
         style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(124,58,237,0.03) 0%, transparent 70%)' }}
@@ -59,10 +59,8 @@ export default function Skills() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: catIndex * 0.07 }}
                 className="glass-card p-5 group"
-                style={{ borderColor: `${color}20` }}
                 whileHover={{ y: -4 }}
               >
-                {/* Icon + Category */}
                 <div className="flex items-center gap-3 mb-4">
                   <div
                     className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 transition-transform duration-300 group-hover:scale-110"
@@ -70,10 +68,11 @@ export default function Skills() {
                   >
                     <Icon size={18} style={{ color }} />
                   </div>
-                  <h3 className="text-white font-semibold text-sm leading-tight">{category.category}</h3>
+                  <h3 className="font-semibold text-sm leading-tight" style={{ color: 'var(--text-primary)' }}>
+                    {category.category}
+                  </h3>
                 </div>
 
-                {/* Skill badges */}
                 <div className="flex flex-wrap gap-2">
                   {category.items.map((item) => (
                     <span

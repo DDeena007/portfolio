@@ -61,7 +61,7 @@ export default function Experience() {
                     <div>
                       <div className="flex items-center gap-2 mb-1">
                         <Briefcase size={16} style={{ color: exp.current ? '#00d4ff' : '#7c3aed' }} />
-                        <h3 className="text-xl font-bold text-white">{exp.role}</h3>
+                        <h3 className="text-xl font-bold" style={{ color: 'var(--text-primary)' }}>{exp.role}</h3>
                         {exp.current && (
                           <span
                             className="text-xs font-medium px-2 py-0.5 rounded-full"
@@ -75,7 +75,7 @@ export default function Experience() {
                         {exp.company}
                       </div>
                     </div>
-                    <div className="flex flex-col items-end gap-1 text-sm text-gray-400">
+                    <div className="flex flex-col items-end gap-1 text-sm" style={{ color: 'var(--text-secondary)' }}>
                       <div className="flex items-center gap-1.5">
                         <Calendar size={13} />
                         <span className="font-mono">{exp.period}</span>
@@ -86,7 +86,7 @@ export default function Experience() {
                       </div>
                       <span
                         className="text-xs px-2 py-0.5 rounded-full"
-                        style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' }}
+                        style={{ background: 'var(--bg-card)', border: '1px solid var(--border-card)' }}
                       >
                         {exp.type}
                       </span>
@@ -105,7 +105,7 @@ export default function Experience() {
                   {/* Highlights */}
                   <ul className="space-y-3 mb-6">
                     {exp.highlights.map((highlight, i) => (
-                      <li key={i} className="flex gap-3 text-gray-300 text-sm leading-relaxed">
+                      <li key={i} className="flex gap-3 text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                         <ChevronRight
                           size={16}
                           className="flex-shrink-0 mt-0.5"
@@ -117,7 +117,7 @@ export default function Experience() {
                   </ul>
 
                   {/* Tech tags */}
-                  <div className="flex flex-wrap gap-2 pt-4 border-t border-white/5">
+                  <div className="flex flex-wrap gap-2 pt-4 border-t" style={{ borderColor: 'var(--border-card)' }}>
                     {exp.technologies.map((tech) => (
                       <span key={tech} className="tech-badge">{tech}</span>
                     ))}

@@ -1,4 +1,4 @@
-import { Mail, Code2, Heart } from 'lucide-react'
+import { Mail, Code2 } from 'lucide-react'
 import { GithubIcon, LinkedinIcon } from './icons/SocialIcons'
 import { personalInfo } from '../data/resume'
 
@@ -6,6 +6,7 @@ interface Social {
   icon: React.ElementType
   href: string
   label: string
+  external: boolean
 }
 
 export default function Footer() {
@@ -17,13 +18,14 @@ export default function Footer() {
     { href: '#experience', label: 'Experience' },
     { href: '#projects', label: 'Projects' },
     { href: '#education', label: 'Education' },
+    { href: '#certifications', label: 'Certifications' },
     { href: '#contact', label: 'Contact' },
   ]
 
   const socials: Social[] = [
-    { icon: GithubIcon, href: personalInfo.github, label: 'GitHub' },
-    { icon: LinkedinIcon, href: personalInfo.linkedin, label: 'LinkedIn' },
-    { icon: Mail, href: `mailto:${personalInfo.email}`, label: 'Email' },
+    { icon: GithubIcon, href: personalInfo.github, label: 'GitHub', external: true },
+    { icon: LinkedinIcon, href: personalInfo.linkedin, label: 'LinkedIn', external: true },
+    { icon: Mail, href: `mailto:${personalInfo.email}`, label: 'Email', external: false },
   ]
 
   const scrollTo = (href: string) => {
@@ -32,7 +34,10 @@ export default function Footer() {
   }
 
   return (
-    <footer className="relative pt-16 pb-8 border-t border-white/5">
+    <footer
+      className="relative pt-16 pb-8 border-t"
+      style={{ borderColor: 'var(--border-card)' }}
+    >
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -47,13 +52,14 @@ export default function Footer() {
           <div>
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="flex items-center gap-2 font-mono font-semibold text-white hover:text-teal-500 transition-colors mb-3"
+              className="flex items-center gap-2 font-mono font-semibold mb-3 transition-colors"
+              style={{ color: 'var(--text-primary)' }}
             >
               <Code2 size={18} style={{ color: '#00d4ff' }} />
               <span style={{ color: '#00d4ff' }}>&lt;</span>DD
               <span style={{ color: '#00d4ff' }}>/&gt;</span>
             </button>
-            <p className="text-gray-400 text-sm leading-relaxed max-w-xs">
+            <p className="text-sm leading-relaxed max-w-xs" style={{ color: 'var(--text-secondary)' }}>
               Software &amp; Big Data Engineer building high-performance pipelines and distributed
               systems at scale.
             </p>
@@ -61,7 +67,10 @@ export default function Footer() {
 
           {/* Nav links */}
           <div>
-            <h3 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider">
+            <h3
+              className="font-semibold mb-4 text-sm uppercase tracking-wider"
+              style={{ color: 'var(--text-primary)' }}
+            >
               Navigation
             </h3>
             <ul className="space-y-2">
@@ -69,7 +78,8 @@ export default function Footer() {
                 <li key={link.href}>
                   <button
                     onClick={() => scrollTo(link.href)}
-                    className="text-gray-400 hover:text-white text-sm transition-colors"
+                    className="text-sm transition-colors hover:text-white"
+                    style={{ color: 'var(--text-secondary)' }}
                   >
                     {link.label}
                   </button>
@@ -80,23 +90,27 @@ export default function Footer() {
 
           {/* Connect */}
           <div>
-            <h3 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider">
+            <h3
+              className="font-semibold mb-4 text-sm uppercase tracking-wider"
+              style={{ color: 'var(--text-primary)' }}
+            >
               Connect
             </h3>
-            <div className="flex gap-3 mb-4">
+            <div className="flex gap-3">
               {socials.map((s) => {
                 const Icon = s.icon
                 return (
                   <a
                     key={s.label}
                     href={s.href}
-                    target={s.label !== 'Email' ? '_blank' : undefined}
-                    rel={s.label !== 'Email' ? 'noopener noreferrer' : undefined}
+                    target={s.external ? '_blank' : undefined}
+                    rel={s.external ? 'noopener noreferrer' : undefined}
                     aria-label={s.label}
-                    className="w-9 h-9 rounded-lg flex items-center justify-center text-gray-400 hover:text-white transition-all duration-200 hover:scale-110"
+                    className="w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110"
                     style={{
-                      background: 'rgba(255,255,255,0.05)',
-                      border: '1px solid rgba(255,255,255,0.08)',
+                      background: 'var(--bg-card)',
+                      border: '1px solid var(--border-card)',
+                      color: 'var(--text-secondary)',
                     }}
                   >
                     <Icon size={16} />
@@ -104,31 +118,19 @@ export default function Footer() {
                 )
               })}
             </div>
-            <a
-              href={personalInfo.resumeFile}
-              download
-              className="text-sm font-medium transition-colors"
-              style={{ color: '#00d4ff' }}
-            >
-              Download Resume →
-            </a>
           </div>
         </div>
 
         {/* Divider */}
         <div className="section-divider mb-6" />
 
-        {/* Bottom row */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-500">
+        {/* Bottom — just copyright */}
+        <div className="text-center text-sm" style={{ color: 'var(--text-muted)' }}>
           <p>
             © {year}{' '}
-            <span className="text-gray-300 font-medium">{personalInfo.name}</span>. All rights
-            reserved.
-          </p>
-          <p className="flex items-center gap-1.5">
-            Built with
-            <Heart size={13} className="text-red-400" />
-            using React, TypeScript &amp; Tailwind CSS
+            <span className="font-medium" style={{ color: 'var(--text-primary)' }}>
+              {personalInfo.name}
+            </span>
           </p>
         </div>
       </div>

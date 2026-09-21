@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
-import { Terminal, Zap, Database, Brain } from 'lucide-react'
-import { summary, stats } from '../data/resume'
+import { Terminal, Zap, Database, Brain, Download } from 'lucide-react'
+import { summary, stats, personalInfo } from '../data/resume'
 
 const highlights = [
   {
@@ -17,8 +17,8 @@ const highlights = [
   },
   {
     icon: Brain,
-    title: 'AI & GenAI Integration',
-    description: 'Experience with LangChain, LangGraph, RAG systems, and deploying AI in global SaaS.',
+    title: 'AI & ML Ops',
+    description: 'Excited to explore LangChain, LangGraph, RAG, and deploying AI/ML systems at scale.',
     color: '#2dd4bf',
   },
   {
@@ -46,7 +46,7 @@ export default function About() {
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-start">
-          {/* Left: Terminal card + summary */}
+          {/* Left: Terminal card + summary + Download */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -55,76 +55,89 @@ export default function About() {
           >
             {/* Terminal window */}
             <div
-              className="glass-card overflow-hidden mb-8"
+              className="glass-card overflow-hidden mb-6"
               style={{ border: '1px solid rgba(0,212,255,0.15)' }}
             >
-              {/* Terminal header */}
               <div
-                className="flex items-center gap-2 px-4 py-3 border-b border-white/5"
-                style={{ background: 'rgba(0,212,255,0.05)' }}
+                className="flex items-center gap-2 px-4 py-3 border-b terminal-header"
+                style={{ borderColor: 'rgba(255,255,255,0.05)', background: 'var(--terminal-bg)' }}
               >
                 <span className="w-3 h-3 rounded-full bg-red-500/70" />
                 <span className="w-3 h-3 rounded-full bg-yellow-500/70" />
                 <span className="w-3 h-3 rounded-full bg-green-500/70" />
-                <span className="ml-2 text-xs text-gray-500 font-mono">deena@portfolio:~</span>
+                <span className="ml-2 text-xs font-mono" style={{ color: 'var(--text-muted)' }}>
+                  deena@portfolio:~
+                </span>
               </div>
-              {/* Terminal body */}
               <div className="p-5 font-mono text-sm space-y-2">
                 <div>
                   <span style={{ color: '#00d4ff' }}>$ </span>
-                  <span className="text-gray-300">whoami</span>
+                  <span style={{ color: 'var(--text-secondary)' }}>whoami</span>
                 </div>
-                <div className="text-gray-400 pl-4">Deena Dhayalan — Software &amp; Big Data Engineer</div>
-
+                <div className="pl-4" style={{ color: 'var(--text-muted)' }}>
+                  Deena Dhayalan — Software &amp; Big Data Engineer
+                </div>
                 <div className="pt-1">
                   <span style={{ color: '#00d4ff' }}>$ </span>
-                  <span className="text-gray-300">cat stats.json</span>
+                  <span style={{ color: 'var(--text-secondary)' }}>cat stats.json</span>
                 </div>
                 <div className="pl-4 text-xs space-y-1">
                   <div>
                     <span className="text-purple-400">"experience"</span>
-                    <span className="text-gray-500">: </span>
-                    <span className="text-green-400">"3+ years"</span>
+                    <span style={{ color: 'var(--text-muted)' }}>: </span>
+                    <span className="text-green-400">"5+ years"</span>
                   </div>
                   <div>
                     <span className="text-purple-400">"throughput"</span>
-                    <span className="text-gray-500">: </span>
+                    <span style={{ color: 'var(--text-muted)' }}>: </span>
                     <span className="text-green-400">"5 billion rows/hr"</span>
                   </div>
                   <div>
                     <span className="text-purple-400">"data_ingestion"</span>
-                    <span className="text-gray-500">: </span>
+                    <span style={{ color: 'var(--text-muted)' }}>: </span>
                     <span className="text-green-400">"5TB/day"</span>
                   </div>
                   <div>
                     <span className="text-purple-400">"gpa"</span>
-                    <span className="text-gray-500">: </span>
+                    <span style={{ color: 'var(--text-muted)' }}>: </span>
                     <span className="text-green-400">"9.1/10"</span>
                   </div>
                   <div>
-                    <span className="text-purple-400">"location"</span>
-                    <span className="text-gray-500">: </span>
-                    <span className="text-green-400">"Chennai, India"</span>
+                    <span className="text-purple-400">"interest"</span>
+                    <span style={{ color: 'var(--text-muted)' }}>: </span>
+                    <span className="text-teal-400">"AI / ML Ops"</span>
                   </div>
                   <div>
                     <span className="text-purple-400">"status"</span>
-                    <span className="text-gray-500">: </span>
+                    <span style={{ color: 'var(--text-muted)' }}>: </span>
                     <span className="text-teal-400">"open to opportunities"</span>
                   </div>
                 </div>
-
                 <div className="pt-1">
                   <span style={{ color: '#00d4ff' }}>$ </span>
-                  <span className="text-gray-300 animate-pulse">_</span>
+                  <span className="animate-pulse" style={{ color: 'var(--text-secondary)' }}>_</span>
                 </div>
               </div>
             </div>
 
-            {/* Summary paragraph */}
-            <p className="text-gray-400 leading-relaxed text-base">{summary}</p>
+            {/* Summary */}
+            <p className="leading-relaxed text-base mb-6" style={{ color: 'var(--text-secondary)' }}>
+              {summary}
+            </p>
+
+            {/* Download Resume — primary CTA in About */}
+            <a
+              href={personalInfo.resumeFile}
+              download
+              className="btn-primary inline-flex"
+              aria-label="Download Deena Dhayalan's Resume"
+            >
+              <Download size={16} />
+              Download Resume
+            </a>
           </motion.div>
 
-          {/* Right: Highlight cards */}
+          {/* Right: Highlight cards + Stats */}
           <div className="grid sm:grid-cols-2 gap-4">
             {highlights.map((h, index) => (
               <motion.div
@@ -141,8 +154,12 @@ export default function About() {
                 >
                   <h.icon size={20} style={{ color: h.color }} />
                 </div>
-                <h3 className="text-white font-semibold mb-2 text-sm">{h.title}</h3>
-                <p className="text-gray-400 text-xs leading-relaxed">{h.description}</p>
+                <h3 className="font-semibold mb-2 text-sm" style={{ color: 'var(--text-primary)' }}>
+                  {h.title}
+                </h3>
+                <p className="text-xs leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+                  {h.description}
+                </p>
               </motion.div>
             ))}
 
@@ -159,7 +176,7 @@ export default function About() {
                   style={{ border: '1px solid rgba(0,212,255,0.1)' }}
                 >
                   <div className="text-xl font-black gradient-text">{s.value}</div>
-                  <div className="text-xs text-gray-400 mt-1">{s.label}</div>
+                  <div className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>{s.label}</div>
                 </motion.div>
               ))}
             </div>

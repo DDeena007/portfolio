@@ -20,9 +20,6 @@ export default function Education() {
           transition={{ duration: 0.5 }}
           className="mb-16"
         >
-          <p className="font-mono text-sm mb-3" style={{ color: '#00d4ff' }}>
-            {'// 05. Education & Publications'}
-          </p>
           <h2 className="section-title">Education</h2>
           <p className="section-subtitle">Academic background and research</p>
           <div className="section-divider w-24" />
@@ -38,7 +35,7 @@ export default function Education() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="glass-card p-6 group"
+                className="glass-card p-6"
                 style={{ borderLeft: '3px solid rgba(124,58,237,0.3)' }}
                 whileHover={{ y: -2 }}
               >
@@ -50,21 +47,21 @@ export default function Education() {
                     <GraduationCap size={22} style={{ color: '#a78bfa' }} />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-white font-bold text-lg leading-tight mb-1">{edu.degree}</h3>
+                    <h3 className="font-bold text-lg leading-tight mb-1" style={{ color: 'var(--text-primary)' }}>
+                      {edu.degree}
+                    </h3>
                     <div className="font-semibold mb-1" style={{ color: '#a78bfa' }}>
                       {edu.institution}
                     </div>
-                    <div className="text-gray-400 text-sm mb-4">
+                    <div className="text-sm mb-4" style={{ color: 'var(--text-muted)' }}>
                       {edu.location} · {edu.period}
                     </div>
-
-                    {/* GPA badge */}
                     <div
                       className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg"
                       style={{ background: '#7c3aed15', border: '1px solid #7c3aed30' }}
                     >
                       <Star size={13} style={{ color: '#fbbf24' }} />
-                      <span className="text-sm font-mono font-semibold text-white">
+                      <span className="text-sm font-mono font-semibold" style={{ color: 'var(--text-primary)' }}>
                         GPA: {edu.gpa}
                       </span>
                     </div>
@@ -83,8 +80,8 @@ export default function Education() {
               transition={{ duration: 0.5 }}
               className="mb-2"
             >
-              <h3 className="text-xl font-bold text-white mb-1">Publications</h3>
-              <p className="text-gray-400 text-sm">Peer-reviewed research</p>
+              <h3 className="text-xl font-bold mb-1" style={{ color: 'var(--text-primary)' }}>Publications</h3>
+              <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>Peer-reviewed research</p>
             </motion.div>
 
             {publications.map((pub, index) => (
@@ -107,13 +104,16 @@ export default function Education() {
                   </div>
                   <div className="flex-1">
                     <div className="flex items-start justify-between gap-2 mb-2">
-                      <h4 className="text-white font-semibold leading-tight">{pub.title}</h4>
+                      <h4 className="font-semibold leading-tight" style={{ color: 'var(--text-primary)' }}>
+                        {pub.title}
+                      </h4>
                       {pub.link !== '#' && (
                         <a
                           href={pub.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex-shrink-0 text-gray-400 hover:text-teal-500 transition-colors"
+                          className="flex-shrink-0 transition-colors"
+                          style={{ color: 'var(--text-muted)' }}
                           aria-label="View publication"
                         >
                           <ExternalLink size={14} />
@@ -126,7 +126,9 @@ export default function Education() {
                     >
                       {pub.venue}
                     </div>
-                    <p className="text-gray-400 text-sm leading-relaxed">{pub.description}</p>
+                    <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                      {pub.description}
+                    </p>
                   </div>
                 </div>
               </motion.div>

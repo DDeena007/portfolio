@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Mail, Download, ArrowDown, ChevronRight } from 'lucide-react'
+import { Mail, ArrowDown, ChevronRight } from 'lucide-react'
 import { GithubIcon, LinkedinIcon } from './icons/SocialIcons'
 import { personalInfo, stats } from '../data/resume'
 
@@ -7,7 +7,7 @@ const titles = [
   'Software Engineer',
   'Big Data Engineer',
   'Distributed Systems Builder',
-  'Data Pipeline Architect',
+  'AI/ML Ops Enthusiast',
 ]
 
 export default function Hero() {
@@ -31,7 +31,6 @@ export default function Hero() {
       setIsDeleting(false)
       setTitleIndex((i) => (i + 1) % titles.length)
     }
-
     return () => clearTimeout(timeout)
   }, [displayed, isDeleting, titleIndex])
 
@@ -43,9 +42,7 @@ export default function Hero() {
     if (!ctx) return
 
     let animId: number
-    const particles: Array<{
-      x: number; y: number; vx: number; vy: number; r: number; alpha: number
-    }> = []
+    const particles: Array<{ x: number; y: number; vx: number; vy: number; r: number; alpha: number }> = []
 
     const resize = () => {
       canvas.width = window.innerWidth
@@ -67,18 +64,15 @@ export default function Hero() {
 
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
-
       particles.forEach((p, i) => {
         p.x += p.vx
         p.y += p.vy
         if (p.x < 0 || p.x > canvas.width) p.vx *= -1
         if (p.y < 0 || p.y > canvas.height) p.vy *= -1
-
         ctx.beginPath()
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
         ctx.fillStyle = `rgba(0, 212, 255, ${p.alpha})`
         ctx.fill()
-
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[j].x - p.x
           const dy = particles[j].y - p.y
@@ -93,10 +87,8 @@ export default function Hero() {
           }
         }
       })
-
       animId = requestAnimationFrame(draw)
     }
-
     draw()
     return () => {
       cancelAnimationFrame(animId)
@@ -104,22 +96,17 @@ export default function Hero() {
     }
   }, [])
 
-  const scrollToNext = () => {
-    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })
-  }
-
   return (
     <section
       id="home"
       className="relative min-h-screen flex items-center overflow-hidden"
       style={{
         background:
-          'radial-gradient(ellipse at 20% 50%, rgba(0, 212, 255, 0.04) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(124, 58, 237, 0.04) 0%, transparent 60%), #0a0f1e',
+          'radial-gradient(ellipse at 20% 50%, rgba(0, 212, 255, 0.04) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(124, 58, 237, 0.04) 0%, transparent 60%), var(--bg-primary)',
       }}
     >
       <canvas ref={canvasRef} id="particle-canvas" aria-hidden="true" />
 
-      {/* Gradient orbs */}
       <div
         className="absolute top-1/4 -left-32 w-96 h-96 rounded-full opacity-10 blur-3xl pointer-events-none"
         style={{ background: 'radial-gradient(circle, #00d4ff, transparent)' }}
@@ -137,32 +124,37 @@ export default function Hero() {
             style={{ background: 'rgba(0,212,255,0.08)', border: '1px solid rgba(0,212,255,0.2)' }}
           >
             <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-            <span className="text-sm font-mono text-gray-300">Available for opportunities</span>
+            <span className="text-sm font-mono" style={{ color: 'var(--text-secondary)' }}>
+              Available for opportunities
+            </span>
           </div>
 
           {/* Name */}
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white mb-4 leading-tight">
+          <h1
+            className="text-5xl sm:text-6xl lg:text-7xl font-black mb-4 leading-tight"
+            style={{ color: 'var(--text-primary)' }}
+          >
             {personalInfo.name.split(' ')[0]}{' '}
             <span className="gradient-text">{personalInfo.name.split(' ')[1]}</span>
           </h1>
 
           {/* Typing title */}
           <div className="h-14 flex items-center mb-6">
-            <span
-              className="text-2xl sm:text-3xl font-mono font-semibold"
-              style={{ color: '#00d4ff' }}
-            >
+            <span className="text-2xl sm:text-3xl font-mono font-semibold" style={{ color: '#00d4ff' }}>
               {displayed}
               <span className="animate-blink ml-0.5 border-r-2 border-teal-500">&nbsp;</span>
             </span>
           </div>
 
           {/* Tagline */}
-          <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mb-10 leading-relaxed">
+          <p
+            className="text-lg sm:text-xl max-w-2xl mb-10 leading-relaxed"
+            style={{ color: 'var(--text-secondary)' }}
+          >
             {personalInfo.tagline}
           </p>
 
-          {/* CTA Buttons */}
+          {/* CTA Buttons — no Download Resume here */}
           <div className="flex flex-wrap gap-4 mb-14">
             <button
               onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
@@ -171,15 +163,12 @@ export default function Hero() {
               View My Work
               <ChevronRight size={16} />
             </button>
-            <a
-              href={personalInfo.resumeFile}
-              download
+            <button
+              onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
               className="btn-secondary"
-              aria-label="Download Deena Dhayalan's Resume"
             >
-              <Download size={16} />
-              Download Resume
-            </a>
+              About Me
+            </button>
           </div>
 
           {/* Social links */}
@@ -188,28 +177,31 @@ export default function Hero() {
               href={personalInfo.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors group"
+              className="flex items-center gap-2 transition-colors group"
+              style={{ color: 'var(--text-secondary)' }}
               aria-label="GitHub Profile"
             >
-              <GithubIcon size={20} className="group-hover:text-teal-500 transition-colors" />
+              <GithubIcon size={20} className="group-hover:text-teal-400" />
               <span className="text-sm font-medium">GitHub</span>
             </a>
             <a
               href={personalInfo.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors group"
+              className="flex items-center gap-2 transition-colors group"
+              style={{ color: 'var(--text-secondary)' }}
               aria-label="LinkedIn Profile"
             >
-              <LinkedinIcon size={20} className="group-hover:text-teal-500 transition-colors" />
+              <LinkedinIcon size={20} className="group-hover:text-teal-400" />
               <span className="text-sm font-medium">LinkedIn</span>
             </a>
             <a
               href={`mailto:${personalInfo.email}`}
-              className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors group"
+              className="flex items-center gap-2 transition-colors group"
+              style={{ color: 'var(--text-secondary)' }}
               aria-label="Send Email"
             >
-              <Mail size={20} className="group-hover:text-teal-500 transition-colors" />
+              <Mail size={20} className="group-hover:text-teal-400" />
               <span className="text-sm font-medium">Email</span>
             </a>
           </div>
@@ -219,7 +211,9 @@ export default function Hero() {
             {stats.map((stat) => (
               <div key={stat.label} className="glass-card p-4 text-center">
                 <div className="text-2xl font-black gradient-text mb-1">{stat.value}</div>
-                <div className="text-xs text-gray-400 font-medium">{stat.label}</div>
+                <div className="text-xs font-medium" style={{ color: 'var(--text-muted)' }}>
+                  {stat.label}
+                </div>
               </div>
             ))}
           </div>
@@ -228,9 +222,10 @@ export default function Hero() {
 
       {/* Scroll indicator */}
       <button
-        onClick={scrollToNext}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-gray-500 hover:text-teal-500 transition-colors animate-bounce"
-        aria-label="Scroll to next section"
+        onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 transition-colors animate-bounce"
+        style={{ color: 'var(--text-muted)' }}
+        aria-label="Scroll to about section"
       >
         <ArrowDown size={24} />
       </button>

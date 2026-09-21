@@ -47,8 +47,8 @@ export default function Achievements() {
                   <Icon size={26} style={{ color }} />
                 </div>
                 <div>
-                  <h3 className="text-white font-bold">{achievement.title}</h3>
-                  <p className="text-gray-400 text-sm mt-0.5">{achievement.description}</p>
+                  <h3 className="font-bold" style={{ color: 'var(--text-primary)' }}>{achievement.title}</h3>
+                  <p className="text-sm mt-0.5" style={{ color: 'var(--text-secondary)' }}>{achievement.description}</p>
                 </div>
               </motion.div>
             )

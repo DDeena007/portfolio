@@ -4,6 +4,38 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── CSS Custom Properties (Dark = default) ── */
+:root {
+  --bg-primary: #0a0f1e;
+  --bg-secondary: #0d1530;
+  --bg-card: rgba(255, 255, 255, 0.03);
+  --bg-card-hover: rgba(255, 255, 255, 0.06);
+  --border-card: rgba(255, 255, 255, 0.08);
+  --border-card-hover: rgba(0, 212, 255, 0.2);
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --nav-bg: rgba(10, 15, 30, 0.95);
+  --scrollbar-thumb: rgba(0, 212, 255, 0.3);
+  --terminal-bg: rgba(0, 212, 255, 0.05);
+}
+
+/* ── Light Mode Overrides ── */
+html.light {
+  --bg-primary: #f1f5f9;
+  --bg-secondary: #e2e8f0;
+  --bg-card: rgba(255, 255, 255, 0.8);
+  --bg-card-hover: rgba(255, 255, 255, 0.95);
+  --border-card: rgba(0, 0, 0, 0.08);
+  --border-card-hover: rgba(0, 212, 255, 0.4);
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --nav-bg: rgba(241, 245, 249, 0.95);
+  --scrollbar-thumb: rgba(0, 180, 220, 0.5);
+  --terminal-bg: rgba(0, 212, 255, 0.08);
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -11,8 +43,10 @@
   }
 
   body {
-    @apply bg-navy-900 text-gray-100 font-sans;
-    background-color: #0a0f1e;
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   * {
@@ -24,16 +58,12 @@
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-navy-900;
+    background: var(--bg-primary);
   }
 
   ::-webkit-scrollbar-thumb {
-    background: rgba(0, 212, 255, 0.3);
+    background: var(--scrollbar-thumb);
     border-radius: 3px;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 212, 255, 0.6);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -42,9 +72,7 @@
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
     }
-    html {
-      scroll-behavior: auto;
-    }
+    html { scroll-behavior: auto; }
   }
 }
 
@@ -54,11 +82,13 @@
   }
 
   .section-title {
-    @apply text-3xl sm:text-4xl font-bold mb-2 text-white;
+    @apply text-3xl sm:text-4xl font-bold mb-2;
+    color: var(--text-primary);
   }
 
   .section-subtitle {
-    @apply text-gray-400 mb-12 text-lg;
+    color: var(--text-secondary);
+    @apply mb-12 text-lg;
   }
 
   .gradient-text {
@@ -69,19 +99,27 @@
   }
 
   .glass-card {
-    background: rgba(255, 255, 255, 0.03);
+    background: var(--bg-card);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--border-card);
     border-radius: 12px;
     transition: all 0.3s ease;
   }
 
   .glass-card:hover {
-    background: rgba(255, 255, 255, 0.06);
-    border-color: rgba(0, 212, 255, 0.2);
+    background: var(--bg-card-hover);
+    border-color: var(--border-card-hover);
     transform: translateY(-2px);
     box-shadow: 0 8px 32px rgba(0, 212, 255, 0.08);
+  }
+
+  html.light .glass-card {
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  }
+
+  html.light .glass-card:hover {
+    box-shadow: 0 8px 30px rgba(0, 212, 255, 0.15);
   }
 
   .btn-primary {
@@ -109,9 +147,7 @@
     transform: translateY(-1px);
   }
 
-  .teal-accent {
-    color: #00d4ff;
-  }
+  .teal-accent { color: #00d4ff; }
 
   .tech-badge {
     @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium font-mono;
@@ -124,13 +160,22 @@
   .tech-badge:hover {
     background: rgba(0, 212, 255, 0.15);
     border-color: rgba(0, 212, 255, 0.5);
-    box-shadow: 0 0 8px rgba(0, 212, 255, 0.2);
   }
 
   .section-divider {
     height: 1px;
     background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.2), transparent);
     margin: 0 auto;
+  }
+
+  /* Light mode: section text */
+  html.light .section-subtitle {
+    color: var(--text-secondary);
+  }
+
+  /* Light mode: terminal bg */
+  html.light .terminal-header {
+    background: rgba(0, 212, 255, 0.08);
   }
 }
 
@@ -144,11 +189,21 @@
   pointer-events: none;
 }
 
-/* Glow effects */
+/* Glow */
 .glow-teal {
   text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
 }
 
-.neon-border {
-  box-shadow: 0 0 5px rgba(0, 212, 255, 0.2), inset 0 0 5px rgba(0, 212, 255, 0.05);
+/* Light mode hero override */
+html.light section#home {
+  background: linear-gradient(135deg, #f1f5f9 0%, #e8f4ff 50%, #f3e8ff 100%) !important;
+}
+
+html.light section#home .glass-card {
+  background: rgba(255,255,255,0.7);
+}
+
+/* Light mode nav */
+html.light nav {
+  --nav-bg: rgba(241, 245, 249, 0.97);
 }

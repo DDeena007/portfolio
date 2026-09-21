@@ -1,24 +1,23 @@
 // ============================================================
 // PORTFOLIO DATA — Edit this file to update all content
 // ============================================================
-// TODO items are clearly marked below — replace with real values
 
 export const personalInfo = {
   name: 'Deena Dhayalan',
   title: 'Software Engineer',
   subtitle: 'Big Data Engineer',
-  tagline: 'Building high-performance data pipelines & scalable distributed systems',
-  email: 'your-email@example.com', // TODO: Replace with your real email
+  tagline: 'Building high-performance data pipelines & scalable distributed systems — excited to explore AI/ML Ops',
+  email: 'deenadhayalan14@gmail.com',
   phone: '+91-7418577294',
-  github: 'https://github.com/YOUR_USERNAME', // TODO: Replace with your GitHub profile URL
-  linkedin: 'https://linkedin.com/in/YOUR_PROFILE', // TODO: Replace with your LinkedIn URL
-  portfolio: '#', // TODO: Replace with your deployed portfolio URL
+  github: 'https://github.com/DDeena007',
+  linkedin: 'https://www.linkedin.com/in/deena-dhayalan-dd/',
+  portfolio: '#',
   resumeFile: '/Deena_Dhayalan_Resume.pdf',
   location: 'Chennai, India',
 }
 
 export const summary =
-  'Engineer with hands-on experience designing and implementing high-performance data pipelines using modern big data technologies. Proficient in working with distributed systems such as Kafka, Hadoop, Hive, Trino, and Apache Pinot to enable scalable data ingestion, transformation, and querying. Skilled in building reliable, low-latency pipelines for both batch and real-time workloads. Experienced in optimizing query performance and managing large-scale data infrastructure that powers analytics and business decision-making.'
+  'Engineer with hands-on experience designing and implementing high-performance data pipelines using modern big data technologies. Proficient in working with distributed systems such as Kafka, Hadoop, Hive, Trino, and Apache Pinot to enable scalable data ingestion, transformation, and querying. Skilled in building reliable, low-latency pipelines for both batch and real-time workloads. Excited to explore and contribute to AI/ML Ops — bringing engineering rigour to the deployment and observability of machine learning systems.'
 
 export const skills = [
   {
@@ -34,7 +33,7 @@ export const skills = [
   {
     category: 'AI / Machine Learning',
     icon: 'brain',
-    items: ['Generative AI (LLMs)', 'LangChain', 'LangGraph', 'RAG Systems', 'Semantic Search', 'Prompt Engineering', 'Agentic Reasoning', 'Model Evaluation'],
+    items: ['Generative AI (LLMs)', 'LangChain', 'LangGraph', 'RAG Systems', 'Semantic Search', 'Prompt Engineering', 'Agentic Reasoning', 'Model Evaluation', 'ML Ops'],
   },
   {
     category: 'Big Data & Streaming',
@@ -111,6 +110,7 @@ export const projects = [
     technologies: ['Trino', 'Java', 'SQL', 'Data LakeHouse'],
     impact: 'Reduced reporting overhead and accelerated data-driven decision-making across teams.',
     type: 'Internal Tool',
+    link: 'https://github.com/DDeena007/queryresolverapp',
   },
   {
     name: 'Multipart Upload System',
@@ -121,6 +121,7 @@ export const projects = [
     technologies: ['Java', 'Backend Services', 'File Systems'],
     impact: 'Improved reliability and scalability of large file handling in production.',
     type: 'Backend Service',
+    link: '',
   },
 ]
 
@@ -140,7 +141,18 @@ export const publications = [
     venue: 'IEEE',
     description:
       'System that recommends suitable crops and predicts plant diseases using live soil and weather data combined with image analysis.',
-    link: '#', // TODO: Replace with actual IEEE link
+    link: '#',
+  },
+]
+
+export const certifications = [
+  {
+    title: 'Use Generative AI for Software Development',
+    issuer: 'IBM SkillsBuild',
+    year: '2024',
+    image: '/certifications/ibm-genai.png',
+    description: 'Certification covering practical use of Generative AI tools and techniques in software development workflows.',
+    color: '#ec4899',
   },
 ]
 
@@ -158,7 +170,7 @@ export const achievements = [
 ]
 
 export const stats = [
-  { label: 'Years of Experience', value: '3+' },
+  { label: 'Years of Experience', value: '5+' },
   { label: 'Data Throughput', value: '5TB/day' },
   { label: 'Kafka Throughput', value: '5B rows/hr' },
   { label: 'GPA', value: '9.1/10' },

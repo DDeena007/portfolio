@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
-import { Code2, Lightbulb, Wrench, TrendingUp } from 'lucide-react'
+import { Code2, Lightbulb, Wrench, TrendingUp, ExternalLink } from 'lucide-react'
+import { GithubIcon } from './icons/SocialIcons'
 import { projects } from '../data/resume'
 
 const cardColors = ['#00d4ff', '#7c3aed']
@@ -9,7 +10,6 @@ export default function Projects() {
     <section
       id="projects"
       className="py-24 relative"
-      style={{ background: 'rgba(0,212,255,0.01)' }}
     >
       <div
         className="absolute inset-0 pointer-events-none"
@@ -50,7 +50,7 @@ export default function Projects() {
                 {/* Card header */}
                 <div
                   className="px-6 pt-6 pb-4"
-                  style={{ borderBottom: '1px solid rgba(255,255,255,0.04)' }}
+                  style={{ borderBottom: '1px solid var(--border-card)' }}
                 >
                   <div className="flex items-start justify-between mb-3">
                     <div
@@ -59,58 +59,84 @@ export default function Projects() {
                     >
                       <Code2 size={20} style={{ color }} />
                     </div>
-                    <span
-                      className="text-xs font-mono px-3 py-1 rounded-full"
-                      style={{
-                        background: `${color}10`,
-                        color: `${color}cc`,
-                        border: `1px solid ${color}20`,
-                      }}
-                    >
-                      {project.type}
-                    </span>
+                    <div className="flex items-center gap-2">
+                      <span
+                        className="text-xs font-mono px-3 py-1 rounded-full"
+                        style={{
+                          background: `${color}10`,
+                          color: `${color}cc`,
+                          border: `1px solid ${color}20`,
+                        }}
+                      >
+                        {project.type}
+                      </span>
+                      {project.link && (
+                        <a
+                          href={project.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-1 text-xs font-medium px-2 py-1 rounded-lg transition-all"
+                          style={{
+                            background: 'var(--bg-card)',
+                            color: 'var(--text-secondary)',
+                            border: '1px solid var(--border-card)',
+                          }}
+                          aria-label={`View ${project.name} on GitHub`}
+                          title="View on GitHub"
+                        >
+                          <GithubIcon size={13} />
+                          <ExternalLink size={10} />
+                        </a>
+                      )}
+                    </div>
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-2">{project.name}</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed">{project.description}</p>
+                  <h3 className="text-xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
+                    {project.name}
+                  </h3>
+                  <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                    {project.description}
+                  </p>
                 </div>
 
                 {/* Card details */}
                 <div className="p-6 space-y-4">
-                  {/* Problem */}
                   <div className="flex gap-3">
                     <Lightbulb size={15} className="text-yellow-400 flex-shrink-0 mt-0.5" />
                     <div>
-                      <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                      <span className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>
                         Problem
                       </span>
-                      <p className="text-gray-300 text-sm mt-1 leading-relaxed">{project.problem}</p>
+                      <p className="text-sm mt-1 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                        {project.problem}
+                      </p>
                     </div>
                   </div>
 
-                  {/* Solution */}
                   <div className="flex gap-3">
                     <Wrench size={15} className="flex-shrink-0 mt-0.5" style={{ color }} />
                     <div>
-                      <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                      <span className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>
                         Solution
                       </span>
-                      <p className="text-gray-300 text-sm mt-1 leading-relaxed">{project.solution}</p>
+                      <p className="text-sm mt-1 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                        {project.solution}
+                      </p>
                     </div>
                   </div>
 
-                  {/* Impact */}
                   <div className="flex gap-3">
                     <TrendingUp size={15} className="text-green-400 flex-shrink-0 mt-0.5" />
                     <div>
-                      <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                      <span className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>
                         Impact
                       </span>
-                      <p className="text-gray-300 text-sm mt-1 leading-relaxed">{project.impact}</p>
+                      <p className="text-sm mt-1 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                        {project.impact}
+                      </p>
                     </div>
                   </div>
 
-                  {/* Tech tags */}
-                  <div className="pt-3 border-t border-white/5">
+                  <div className="pt-3 border-t" style={{ borderColor: 'var(--border-card)' }}>
                     <div className="flex flex-wrap gap-2">
                       {project.technologies.map((tech) => (
                         <span
@@ -133,13 +159,13 @@ export default function Projects() {
           })}
         </div>
 
-        {/* Attribution note */}
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4 }}
-          className="text-center text-gray-500 text-sm mt-10 font-mono"
+          className="text-center text-sm mt-10 font-mono"
+          style={{ color: 'var(--text-muted)' }}
         >
           <span style={{ color: '#00d4ff' }}>// </span>
           Projects built at Zoho Corporation as part of the BDaaS platform
