@@ -7,7 +7,7 @@ export const personalInfo = {
   title: 'Software Engineer',
   subtitle: 'Big Data Engineer',
   tagline: 'Building high-performance data pipelines & scalable distributed systems — excited to explore AI/ML Ops',
-  email: 'deenadhayalan14@gmail.com',
+  email: 'deenadhayalan.dd7@gmail.com',
   phone: '+91-7418577294',
   github: 'https://github.com/DDeena007',
   linkedin: 'https://www.linkedin.com/in/deena-dhayalan-dd/',
